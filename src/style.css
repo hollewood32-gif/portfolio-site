@@ -418,6 +418,20 @@ code {
   margin-top: 0.5rem;
 }
 
+/* ---------- 404 page ---------- */
+.not-found {
+  padding: 6rem 0 3rem;
+}
+
+.not-found h1 {
+  font-size: clamp(2rem, 6vw, 3rem);
+}
+
+.not-found-extra {
+  margin-top: 2rem;
+  color: var(--muted);
+}
+
 /* ---------- Resume ---------- */
 .section-head {
   display: flex;

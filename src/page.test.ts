@@ -2,12 +2,27 @@ import { describe, expect, it } from "vitest";
 // "?raw" asks Vite for the file's text instead of treating it as a web page.
 import home from "../index.html?raw";
 import flingCaseStudy from "../projects/ragdoll-fling/index.html?raw";
+import notFound from "../404.html?raw";
 
 // Every page of the site, by the address it's served at. Keep in sync with vite.config.ts.
 const pages: Record<string, string> = {
   "/": home,
   "/projects/ragdoll-fling/": flingCaseStudy,
+  "/404.html": notFound,
 };
+
+describe("404 page", () => {
+  // It's served at any wrong address (e.g. /a/b/c), so relative links would break.
+  it("only uses links and files that start from the site root or another site", () => {
+    for (const url of [...attr(notFound, "href"), ...attr(notFound, "src")]) {
+      expect(url, url).toMatch(/^(\/|#|https:\/\/)/);
+    }
+  });
+
+  it("asks search engines not to list it", () => {
+    expect(notFound).toContain('<meta name="robots" content="noindex" />');
+  });
+});
 
 // Files in public/ are served as-is from the site root (e.g. public/favicon.svg -> /favicon.svg).
 const publicFiles = Object.keys(import.meta.glob("../public/*")).map((p) => p.replace("../public", ""));
