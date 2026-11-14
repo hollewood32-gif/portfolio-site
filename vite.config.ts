@@ -41,6 +41,7 @@ export default defineConfig({
       input: {
         home: "index.html",
         ragdollFling: "projects/ragdoll-fling/index.html",
+        notFound: "404.html",
       },
     },
   },

@@ -27,7 +27,9 @@
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
-    "run_worker_first": true
+    "run_worker_first": true,
+    // Addresses that don't match a file get dist/404.html with a "404 Not Found" status.
+    "not_found_handling": "404-page"
   },
 
   // Production keeps a backup address on workers.dev, but doesn't make
