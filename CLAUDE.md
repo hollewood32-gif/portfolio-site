@@ -81,7 +81,7 @@ A separate project from the Ragdoll Fling game (`C:\Users\Owner\Desktop\Video Ga
      - `src/contrast.test.ts`: reads the color variables from `style.css` (dark, plus the light-mode overrides) and checks every text/background pair is at least 4.5 : 1. Needs `test.css.include` in `vite.config.ts`, because Vitest hands tests an empty string for CSS otherwise. Add new pairs to its `pairs` list when adding colors.
      - Links inside the site are checked on every PR by `src/page.test.ts`. Outside links: `.github/workflows/links.yml` + `scripts/check-links.mjs` (also `npm run check-links`), Mondays 15:23 UTC, opens/closes an issue labelled `broken-link` like the uptime check. Owner chose weekly over per-PR so other sites' outages can't block merges.
      - Proven by planting a missing alt text (axe: image-alt) and a pale grey (1.87 : 1); both failed, then were reverted.
-   - [ ] LinkedIn link once the owner has a profile.
+   - [x] PR #17: LinkedIn (https://www.linkedin.com/in/jeffrey-doughty, given by the owner 2026-11-14) in the Contact section and the resume PDF header (the header now wraps between items, not words). LinkedIn answers scripts with status 999, so `check-links.mjs` reports 999 as "⚠️ check by hand" instead of broken; the profile can only be checked in a real browser.
    - [ ] Maybe: add `.ts` extensions to the imports in `vite.config.ts` to silence Vite's future "configLoader: native" warning.
    - Screenshot method (to redo it): open the live game in the browser pane at 1200x675 with the pane visible (the game pauses when hidden), throw with smooth synthetic pointer events from the page, save canvas frames with `canvas.toDataURL()` every 60 ms, pick one, convert to WebP, then decode it into `public/` and compare SHA-256 hashes.
 

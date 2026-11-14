@@ -32,6 +32,11 @@ async function visit(url) {
       signal: AbortSignal.timeout(20_000),
       headers: { "user-agent": "Mozilla/5.0 (portfolio-site link check)" },
     });
+    // 999 = LinkedIn's "no automated visitors" answer. The page can't be checked by
+    // a script, so report it as unchecked instead of broken (check it by hand).
+    if (res.status === 999) {
+      return { url, ok: true, detail: "⚠️ 999: this site blocks automated checks, so check it by hand" };
+    }
     // 429 = "too many requests": the site is up but busy, so don't call it broken.
     const ok = res.status < 400 || res.status === 429;
     return { url, ok, detail: `${res.status}${res.redirected ? ` (redirected to ${res.url})` : ""}` };
