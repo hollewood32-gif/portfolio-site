@@ -55,7 +55,13 @@ A separate project from the Ragdoll Fling game (`C:\Users\Owner\Desktop\Video Ga
 1. [x] Design interview, saved here. (2026-11-14)
 2. [x] Stack chosen: Vite + HTML/CSS/TS. (2026-11-14)
 3. [x] Repo: create the folder and public GitHub repo, protect `main`, first PR (the Vite skeleton). (Done 2026-11-14. The "Protect main" ruleset requires a PR, blocks force pushes and deletion; the required `checks` status check gets added in phase 4 once that job exists.)
-4. [ ] Pipeline and hosting: reuse the game's setup. PR `checks` job (lint, typecheck, test, build) plus a preview link; merging to `main` deploys to staging automatically; production waits for the owner's approval (GitHub environments `staging` and `production`, required reviewer hollewood32-gif, plus an `npm run approve` script like the game's). Apex domain for production, `staging.` subdomain for staging.
+4. [x] Pipeline and hosting (PR #2, 2026-11-14): reuse the game's setup.
+   - Workers `portfolio` (production: jeffreydoughty.com + www.jeffreydoughty.com, workers.dev backup https://portfolio.ragdoll-fling.workers.dev) and `portfolio-staging` (https://staging.jeffreydoughty.com, PR previews `https://pr-<number>-portfolio-staging.ragdoll-fling.workers.dev`).
+   - `worker/index.ts` runs first on every request (`run_worker_first: true`): any `www.` host gets a 301 to the same path without `www.`; everything else is served from `dist/` via the `ASSETS` binding.
+   - Before claiming the apex, checked on 2026-11-14: jeffreydoughty.com had no A/AAAA/MX/TXT records, and the only Workers were the game's (`fling.`, `fling-staging.`). Note there are no MX records, so no email on the domain yet.
+   - Staging was deployed once by hand from this computer (`npx wrangler deploy --env staging`) to prove the config. Production only deploys through the pipeline.
+   - GitHub environments `staging` (no gate) and `production` (required reviewer hollewood32-gif, protected branches only), created with `gh api`. Repo secret `CLOUDFLARE_API_TOKEN` was created by the owner. The "Protect main" ruleset requires the `checks` status check.
+   - Original plan for reference: PR `checks` job (lint, typecheck, test, build) plus a preview link; merging to `main` deploys to staging automatically; production waits for the owner's approval (GitHub environments `staging` and `production`, required reviewer hollewood32-gif, plus an `npm run approve` script like the game's). Apex domain for production, `staging.` subdomain for staging.
 5. [ ] Content PRs: Home/About, Projects (Ragdoll Fling first), Resume (HTML + PDF), Contact.
 6. [ ] Polish: favicon, link preview card, accessibility and phone checks.
 
