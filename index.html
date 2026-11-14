@@ -19,6 +19,7 @@
         <a class="nav-name" href="#top">Jeffrey Doughty</a>
         <ul class="nav-links">
           <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
           <li><a href="https://github.com/hollewood32-gif">GitHub</a></li>
         </ul>
       </nav>
@@ -49,6 +50,74 @@
           <a href="https://fling.jeffreydoughty.com">Ragdoll Fling</a>, is a browser game I took from
           an idea to a live site with a full CI/CD pipeline and an online leaderboard.
         </p>
+      </section>
+
+      <section class="section" id="projects" aria-labelledby="projects-title">
+        <h2 id="projects-title">Projects</h2>
+
+        <article class="card card-featured" aria-labelledby="fling-title">
+          <p class="card-label">Featured</p>
+          <h3 id="fling-title">Ragdoll Fling</h3>
+          <p class="card-summary">
+            A 30-second browser physics game. Grab the ragdoll, fling it into the walls, and chain
+            hits into combos for big damage. Then try to get your initials on the online leaderboard.
+          </p>
+          <ul class="tags" aria-label="Built with">
+            <li>TypeScript</li>
+            <li>Matter.js</li>
+            <li>HTML Canvas</li>
+            <li>Vite</li>
+            <li>Cloudflare Workers</li>
+            <li>Cloudflare D1</li>
+            <li>GitHub Actions</li>
+            <li>Vitest</li>
+          </ul>
+          <ul class="highlights">
+            <li>
+              <strong>Physics and game feel.</strong> The ragdoll is rigid bodies joined together.
+              Damage scales with impact speed, quick hits build a combo multiplier, and every hit
+              gets floating numbers, screen shake and sound. Works with a mouse or a touchscreen.
+            </li>
+            <li>
+              <strong>CI/CD pipeline.</strong> Every pull request runs lint, type-check, tests and a
+              build, and gets its own preview link. Merging deploys to staging automatically;
+              production deploys the same build only after I approve it. I proved the gate works by
+              opening a pull request with a deliberately broken test: merging was blocked.
+            </li>
+            <li>
+              <strong>Online leaderboard.</strong> A small API on Cloudflare Workers backed by a D1
+              (SQL) database. The pipeline runs database migrations before each deploy. The server
+              validates every score, rejects impossible ones and rate-limits submissions. It stores
+              only 3-letter initials, the score and the date.
+            </li>
+            <li>
+              <strong>Infrastructure as code.</strong> Hosting, custom domains and both environments
+              are defined in the repo, not clicked together in a dashboard.
+            </li>
+          </ul>
+          <div class="actions">
+            <a class="button" href="https://fling.jeffreydoughty.com">Play it</a>
+            <a class="button button-secondary" href="https://github.com/hollewood32-gif/ragdoll-fling">View the code</a>
+          </div>
+        </article>
+
+        <article class="card" aria-labelledby="site-title">
+          <h3 id="site-title">This website</h3>
+          <p class="card-summary">
+            The site you're reading. I reused the game's pipeline almost unchanged: pull request
+            checks and previews, automatic staging deploys, and production after approval. A few
+            lines of server code redirect www.jeffreydoughty.com to the main address.
+          </p>
+          <ul class="tags" aria-label="Built with">
+            <li>TypeScript</li>
+            <li>Vite</li>
+            <li>Cloudflare Workers</li>
+            <li>GitHub Actions</li>
+          </ul>
+          <div class="actions">
+            <a class="button button-secondary" href="https://github.com/hollewood32-gif/portfolio-site">View the code</a>
+          </div>
+        </article>
       </section>
     </main>
 

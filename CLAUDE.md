@@ -64,6 +64,9 @@ A separate project from the Ragdoll Fling game (`C:\Users\Owner\Desktop\Video Ga
    - GitHub environments `staging` (no gate) and `production` (required reviewer hollewood32-gif, protected branches only), created with `gh api`. Repo secret `CLOUDFLARE_API_TOKEN` was created by the owner. The "Protect main" ruleset requires the `checks` status check.
    - Original plan for reference: PR `checks` job (lint, typecheck, test, build) plus a preview link; merging to `main` deploys to staging automatically; production waits for the owner's approval (GitHub environments `staging` and `production`, required reviewer hollewood32-gif, plus an `npm run approve` script like the game's). Apex domain for production, `staging.` subdomain for staging.
 5. [ ] Content PRs: Home/About, Projects (Ragdoll Fling first), Resume (HTML + PDF), Contact.
+   - [x] PR #3: Home/About and the dark design.
+   - [x] PR #4: Projects (Ragdoll Fling featured, plus "This website"). On phones (under 34rem) the nav hides the name and keeps only the links.
+   - [ ] Resume, Contact.
 6. [ ] Polish: favicon, link preview card, accessibility and phone checks.
 
 ## Notes for future sessions
