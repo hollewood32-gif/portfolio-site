@@ -1,19 +1,214 @@
-/* Placeholder styles. The real design (clean and minimal, one accent color) comes in the content PRs. */
+/* ---------- Colors ----------
+   Dark by default. Visitors whose device is set to light mode get the light set.
+   Every color is a variable, so each look is defined in one place. */
 :root {
-  font-family: system-ui, sans-serif;
-  line-height: 1.6;
-  color: #1a1a1a;
-  background: #ffffff;
+  --bg: #0b1220;
+  --surface: #121b2e;
+  --border: #22304a;
+  --text: #e6ebf5;
+  --muted: #9aa7bd;
+  --accent: #7cc4ff; /* light blue: links and buttons */
+  --accent-hover: #a5d6ff;
+  --on-accent: #0b1220; /* text on a light blue button */
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #ffffff;
+    --surface: #f4f6fa;
+    --border: #dde3ec;
+    --text: #1a1f2b;
+    --muted: #5a6475;
+    --accent: #1d5fd1; /* darker blue, so it stays readable on white */
+    --accent-hover: #1549a6;
+    --on-accent: #ffffff;
+  }
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Leaves room for the sticky nav when jumping to a section. */
+  scroll-padding-top: 5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
-  max-width: 40rem;
-  margin: 0 auto;
-  padding: 4rem 1rem;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.65;
 }
 
-footer {
-  margin-top: 4rem;
-  color: #666;
+a {
+  color: var(--accent);
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Hidden until a keyboard user presses Tab, then lets them skip the nav. */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  padding: 0.5rem 1rem;
+  background: var(--accent);
+  color: var(--on-accent);
+  border-radius: 6px;
+  z-index: 10;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* ---------- Nav ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 0.875rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.nav-name {
+  color: var(--text);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  color: var(--text);
+}
+
+/* ---------- Page sections ---------- */
+main {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.hero {
+  padding: 6rem 0 4rem;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+h1 {
+  margin: 0.25rem 0 0.75rem;
+  font-size: clamp(2.5rem, 8vw, 3.75rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.headline {
+  margin: 0;
+  max-width: 34rem;
+  color: var(--muted);
+  font-size: clamp(1.125rem, 3vw, 1.375rem);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.7rem 1.25rem;
+  border: 2px solid var(--accent);
+  border-radius: 8px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.button:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: var(--on-accent);
+}
+
+.button-secondary {
+  background: transparent;
+  color: var(--accent);
+}
+
+.button-secondary:hover {
+  background: transparent;
+  color: var(--accent-hover);
+}
+
+.section {
+  padding: 3rem 0;
+  border-top: 1px solid var(--border);
+}
+
+h2 {
+  margin: 0 0 1rem;
+  font-size: 1.75rem;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  max-width: 48rem;
+  margin: 3rem auto 0;
+  padding: 2rem 1rem 3rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
   font-size: 0.875rem;
 }
