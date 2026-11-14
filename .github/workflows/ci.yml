@@ -55,8 +55,9 @@ jobs:
   preview:
     name: preview
     needs: checks
-    # Pull requests from forks can't use this repo's secrets, so skip them.
-    if: github.event.pull_request.head.repo.full_name == github.repository
+    # Pull requests from forks and from Dependabot can't use this repo's secrets
+    # (a GitHub safety rule), so skip the preview for them. "checks" still runs.
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     permissions:
       contents: read

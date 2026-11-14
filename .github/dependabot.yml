@@ -1,0 +1,30 @@
+# Dependabot: GitHub checks once a week whether the libraries this site uses
+# have newer versions, and opens a pull request for each update. The normal CI
+# checks run on those PRs, so an update that breaks something can't be merged.
+version: 2
+updates:
+  # npm libraries (package.json)
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    # Bundle the small, low-risk updates into one PR per week instead of many.
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "deps"
+
+  # The GitHub Actions used by the workflows (actions/checkout etc.)
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    groups:
+      actions:
+        patterns: ["*"]
+    commit-message:
+      prefix: "ci"

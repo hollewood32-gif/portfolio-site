@@ -71,7 +71,10 @@ A separate project from the Ragdoll Fling game (`C:\Users\Owner\Desktop\Video Ga
 
 7. [ ] Extras (suggested 2026-11-14, owner picked 1 and 2 first):
    - [x] PR #8: Ragdoll Fling case study page at `/projects/ragdoll-fling/` (pipeline diagram, five problems solved, takeaways) and a real game screenshot (`public/ragdoll-fling.webp`) on the project card and the case study. The site is now multi-page: each page is listed in `vite.config.ts` (`build.rollupOptions.input`) and in `src/page.test.ts` (`pages`). The page tests check every internal link and image points to a real page, section or file.
-   - [ ] Dependabot, an uptime check (scheduled GitHub Action), accessibility and link checks in CI, Cloudflare Web Analytics, a custom 404 page, LinkedIn link once the owner has a profile.
+   - [x] PR #9: operations.
+     - Dependabot (`.github/dependabot.yml`): weekly npm and GitHub Actions updates, small updates grouped into one PR. Dependabot PRs can't read repo secrets, so `ci.yml` skips the preview job for them; the required `checks` job still runs.
+     - Uptime check (`.github/workflows/uptime.yml` + `scripts/check-sites.mjs`, also `npm run check-sites`): hourly at :17, checks the portfolio home, the www redirect, the case study, the game and the leaderboard API. A failure opens one issue labelled `site-down` (or comments on the open one); the next passing run closes it. "Run workflow" with **fault drill** adds a check that's meant to fail, to test alerts. GitHub disables scheduled workflows in a public repo after 60 days without commits; re-enable from the Actions tab if that happens.
+   - [ ] Accessibility and link checks in CI, Cloudflare Web Analytics, a custom 404 page, LinkedIn link once the owner has a profile.
    - Screenshot method (to redo it): open the live game in the browser pane at 1200x675 with the pane visible (the game pauses when hidden), throw with smooth synthetic pointer events from the page, save canvas frames with `canvas.toDataURL()` every 60 ms, pick one, convert to WebP, then decode it into `public/` and compare SHA-256 hashes.
 
 ## Notes for future sessions
