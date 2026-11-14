@@ -31,6 +31,7 @@ export const resume: Resume = {
     { label: "jeff@jeffreydoughty.com", url: "mailto:jeff@jeffreydoughty.com" },
     { label: "jeffreydoughty.com", url: "https://jeffreydoughty.com" },
     { label: "github.com/hollewood32-gif", url: "https://github.com/hollewood32-gif" },
+    { label: "linkedin.com/in/jeffrey-doughty-6a5ab72a7", url: "https://www.linkedin.com/in/jeffrey-doughty-6a5ab72a7" },
   ],
   summary:
     "U.S. Navy veteran and former nuclear equipment technician who now builds and ships web software. " +
