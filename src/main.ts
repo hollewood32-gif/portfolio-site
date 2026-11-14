@@ -1,3 +1,4 @@
+import { loadAnalytics } from "./analytics";
 import { revealEmailLinks } from "./contact";
 import { footerText } from "./footer";
 
@@ -9,3 +10,6 @@ if (footer) {
 
 // Put together the email links (see contact.ts for why).
 revealEmailLinks(document);
+
+// Count the visit with Cloudflare Web Analytics (real site only; see analytics.ts).
+loadAnalytics(document);
