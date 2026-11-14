@@ -11,11 +11,13 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "approve": "node scripts/approve-production.mjs",
+    "images": "node scripts/make-images.mjs",
     "deploy:staging": "npm run build && wrangler deploy --env staging",
     "deploy:production": "npm run build && wrangler deploy --env=\"\""
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20261114.1",
+    "@resvg/resvg-js": "^2.6.2",
     "oxlint": "^1.93.0",
     "pdf-lib": "^1.17.1",
     "typescript": "^7.0.2",

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <!-- Link preview card (what LinkedIn, Discord, iMessage etc. show when the site is shared).
+       Turned into public/og-image.png by `npm run images`. Colors match src/style.css. -->
+  <rect width="1200" height="630" fill="#0b1220"/>
+  <rect x="0" y="0" width="1200" height="10" fill="#7cc4ff"/>
+
+  <!-- The JD monogram from the favicon, scaled up -->
+  <g transform="translate(96 110) scale(1.5)">
+    <rect width="64" height="64" rx="14" fill="#121b2e" stroke="#22304a" stroke-width="1.5"/>
+    <g fill="none" stroke="#7cc4ff" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M27 17 V38 Q27 47 19 47 Q13 47 11.5 42"/>
+      <path d="M36 17 H41 Q53 17 53 32 Q53 47 41 47 H36 Z"/>
+    </g>
+  </g>
+
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <text x="96" y="330" font-size="92" font-weight="700" fill="#e6ebf5" letter-spacing="-2">Jeffrey Doughty</text>
+    <text x="96" y="400" font-size="38" fill="#9aa7bd">I build and ship web software,</text>
+    <text x="96" y="450" font-size="38" fill="#9aa7bd">from first commit to production.</text>
+    <text x="96" y="545" font-size="34" font-weight="600" fill="#7cc4ff">jeffreydoughty.com</text>
+  </g>
+</svg>
