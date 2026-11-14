@@ -26,7 +26,9 @@ export interface Resume {
 export const resume: Resume = {
   name: "Jeffrey Doughty",
   location: "Orange County, CA",
+  // Shown in the PDF's header line only (the page has its own Contact section).
   links: [
+    { label: "jeff@jeffreydoughty.com", url: "mailto:jeff@jeffreydoughty.com" },
     { label: "jeffreydoughty.com", url: "https://jeffreydoughty.com" },
     { label: "github.com/hollewood32-gif", url: "https://github.com/hollewood32-gif" },
   ],
