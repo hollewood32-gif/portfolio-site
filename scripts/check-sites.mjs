@@ -11,6 +11,7 @@ const checks = [
   { name: "Portfolio home", url: "https://jeffreydoughty.com/", status: 200, contains: "Jeffrey Doughty" },
   { name: "www redirect", url: "https://www.jeffreydoughty.com/", status: 301, redirectsTo: "https://jeffreydoughty.com/" },
   { name: "Ragdoll Fling case study", url: "https://jeffreydoughty.com/projects/ragdoll-fling/", status: 200, contains: "How I built Ragdoll Fling" },
+  { name: "Missing page shows the 404 page", url: "https://jeffreydoughty.com/uptime-check-missing-page", status: 404, contains: "<title>Page not found" },
   { name: "Ragdoll Fling game", url: "https://fling.jeffreydoughty.com/", status: 200, contains: "Ragdoll Fling" },
   { name: "Leaderboard API", url: "https://fling.jeffreydoughty.com/api/leaderboard", status: 200, json: true },
 ];
