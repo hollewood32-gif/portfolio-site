@@ -25,7 +25,8 @@ function luminance(hex: string): number {
 }
 
 export function contrast(a: string, b: string): number {
-  const [hi, lo] = [luminance(a), luminance(b)].toSorted((x, y) => y - x);
+  const hi = Math.max(luminance(a), luminance(b));
+  const lo = Math.min(luminance(a), luminance(b));
   return (hi + 0.05) / (lo + 0.05);
 }
 
