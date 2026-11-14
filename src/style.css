@@ -278,6 +278,90 @@ h3 {
   margin-top: 1.5rem;
 }
 
+/* ---------- Resume ---------- */
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.section-head h2 {
+  margin: 0;
+}
+
+.resume-summary {
+  margin: 0;
+}
+
+.resume-group {
+  margin-top: 2rem;
+}
+
+.resume-group h3 {
+  margin: 0 0 0.75rem;
+  color: var(--accent);
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.resume-group p {
+  margin: 0;
+}
+
+.resume-skills {
+  margin: 0;
+}
+
+.resume-skills div + div {
+  margin-top: 0.5rem;
+}
+
+.resume-skills dt {
+  font-weight: 600;
+}
+
+.resume-skills dd {
+  margin: 0;
+  color: var(--muted);
+}
+
+.resume-entry + .resume-entry {
+  margin-top: 1.25rem;
+}
+
+.resume-entry-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0 1rem;
+}
+
+.resume-entry h4 {
+  margin: 0;
+  font-size: 1.0625rem;
+}
+
+.resume-dates,
+.resume-org {
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+.resume-org {
+  margin: 0;
+  font-style: italic;
+}
+
+.resume-entry ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.25rem;
+}
+
 /* ---------- Footer ---------- */
 .site-footer {
   max-width: 48rem;
