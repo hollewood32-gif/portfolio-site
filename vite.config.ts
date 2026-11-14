@@ -1,4 +1,6 @@
-// Vite settings. The one addition: a small plugin that builds the resume.
+// Vite settings:
+// 1. The site has more than one page, so the build lists each page's HTML file.
+// 2. A small plugin builds the resume:
 //   - Puts the resume HTML into index.html where it says <!-- resume:content -->
 //   - Writes Jeffrey-Doughty-Resume.pdf into the build output (dist/)
 //   - Serves the same PDF from the dev server, so the link works locally too
@@ -12,8 +14,9 @@ const PDF_NAME = "Jeffrey-Doughty-Resume.pdf";
 function resumePlugin(): Plugin {
   return {
     name: "resume",
-    transformIndexHtml(html) {
-      if (!html.includes("<!-- resume:content -->")) {
+    transformIndexHtml(html, ctx) {
+      const isHomePage = ctx.path === "/index.html" || ctx.path === "/";
+      if (isHomePage && !html.includes("<!-- resume:content -->")) {
         throw new Error("index.html is missing the <!-- resume:content --> marker");
       }
       return html.replace("<!-- resume:content -->", resumeHtml(resume));
@@ -32,4 +35,13 @@ function resumePlugin(): Plugin {
 
 export default defineConfig({
   plugins: [resumePlugin()],
+  build: {
+    rollupOptions: {
+      // Every page of the site (paths from the project folder). Add new pages here.
+      input: {
+        home: "index.html",
+        ragdollFling: "projects/ragdoll-fling/index.html",
+      },
+    },
+  },
 });
