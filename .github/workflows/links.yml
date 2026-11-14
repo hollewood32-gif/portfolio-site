@@ -1,0 +1,70 @@
+# Outside-link check: every Monday, visit every link to another website
+# (scripts/check-links.mjs).
+#   - A link is broken -> open a GitHub issue labelled "broken-link", or comment
+#     on the one that's already open.
+#   - All links work again -> close that issue.
+# Works like uptime.yml. "Run workflow" in the Actions tab runs it by hand.
+# On pull requests that change this check, it only runs the check (no issues).
+name: Links
+
+on:
+  schedule:
+    - cron: "23 15 * * 1" # Mondays at 15:23 UTC (morning in California)
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - scripts/check-links.mjs
+      - .github/workflows/links.yml
+
+concurrency:
+  group: links
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  issues: write # to open, comment on and close the alert issue
+
+jobs:
+  check:
+    name: check outside links
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+
+      - name: Visit every outside link
+        id: check
+        continue-on-error: true
+        run: node scripts/check-links.mjs
+
+      - name: Open or update the alert issue
+        if: steps.check.outcome == 'failure' && github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          gh label create broken-link --color D93F0B --description "A link to another site is broken" --force
+          printf '\n[Workflow run](%s)\n' "$RUN_URL" >> links-report.md
+          open=$(gh issue list --label broken-link --state open --json number --jq '.[0].number // empty')
+          if [ -n "$open" ]; then
+            gh issue comment "$open" --body-file links-report.md
+          else
+            gh issue create --title "Broken link on the site" --label broken-link --body-file links-report.md
+          fi
+
+      - name: Close the alert issue when all links work again
+        if: steps.check.outcome == 'success' && github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          open=$(gh issue list --label broken-link --state open --json number --jq '.[0].number // empty')
+          if [ -n "$open" ]; then
+            gh issue close "$open" --comment "Fixed: all outside links work again. $(date -u +%Y-%m-%dT%H:%MZ)"
+          fi
+
+      - name: Mark the run as failed if a link is broken
+        if: steps.check.outcome == 'failure'
+        run: exit 1

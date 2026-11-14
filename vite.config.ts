@@ -4,6 +4,8 @@
 //   - Puts the resume HTML into index.html where it says <!-- resume:content -->
 //   - Writes Jeffrey-Doughty-Resume.pdf into the build output (dist/)
 //   - Serves the same PDF from the dev server, so the link works locally too
+// 3. Test settings (Vitest reads this file too).
+/// <reference types="vitest/config" />
 import { defineConfig, type Plugin } from "vite";
 import { resume } from "./src/resume-data";
 import { resumeHtml } from "./src/resume-html";
@@ -44,5 +46,10 @@ export default defineConfig({
         notFound: "404.html",
       },
     },
+  },
+  test: {
+    // Vitest skips CSS files unless told otherwise. contrast.test.ts needs the
+    // real text of style.css to check its colors.
+    css: { include: [/style\.css/] },
   },
 });
