@@ -66,7 +66,8 @@ A separate project from the Ragdoll Fling game (`C:\Users\Owner\Desktop\Video Ga
 5. [ ] Content PRs: Home/About, Projects (Ragdoll Fling first), Resume (HTML + PDF), Contact.
    - [x] PR #3: Home/About and the dark design.
    - [x] PR #4: Projects (Ragdoll Fling featured, plus "This website"). On phones (under 34rem) the nav hides the name and keeps only the links.
-   - [ ] Resume, Contact.
+   - [x] PR #5: Resume. Software-first rewrite of the owner's resume (approved 2026-11-14), location shown as "Orange County, CA" only. The text lives in `src/resume-data.ts`; a plugin in `vite.config.ts` builds both the page section (replacing `<!-- resume:content -->` in index.html) and `Jeffrey-Doughty-Resume.pdf` (pdf-lib, layout in `src/resume-pdf.ts`). A test fails if a phone number ever appears in the resume data. The Cyber Security Specialist program's school isn't on the original resume; ask the owner if they want it added.
+   - [ ] Contact (then add the chosen email to the resume header too).
 6. [ ] Polish: favicon, link preview card, accessibility and phone checks.
 
 ## Notes for future sessions
