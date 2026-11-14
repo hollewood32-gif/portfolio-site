@@ -13,12 +13,13 @@ const INK = rgb(0.1, 0.12, 0.17);
 const MUTED = rgb(0.35, 0.39, 0.46);
 const ACCENT = rgb(0.11, 0.37, 0.82); // the site's light-mode blue
 
-// Splits text into lines that each fit within maxWidth.
-function wrap(text: string, font: PDFFont, size: number, maxWidth: number): string[] {
+// Splits text into lines that each fit within maxWidth, breaking between pieces
+// separated by `separator` (normally spaces, so it breaks between words).
+function wrap(text: string, font: PDFFont, size: number, maxWidth: number, separator = " "): string[] {
   const lines: string[] = [];
   let line = "";
-  for (const word of text.split(" ")) {
-    const next = line ? `${line} ${word}` : word;
+  for (const word of text.split(separator)) {
+    const next = line ? `${line}${separator}${word}` : word;
     if (font.widthOfTextAtSize(next, size) > maxWidth && line) {
       lines.push(line);
       line = word;
@@ -90,7 +91,12 @@ export async function resumePdf(r: Resume): Promise<Uint8Array> {
   // Header: name, then location and links on one line.
   y -= 22;
   page.drawText(r.name, { x: MARGIN, y, size: 22, font: bold, color: INK });
-  paragraph([r.location, ...r.links.map((l) => l.label)].join("  ·  "), regular, 10, MUTED);
+  // Wrap between items (not words), so no line ends with a dangling "·".
+  const separator = "  ·  ";
+  for (const line of wrap([r.location, ...r.links.map((l) => l.label)].join(separator), regular, 10, WIDTH, separator)) {
+    y -= 13.5;
+    page.drawText(line, { x: MARGIN, y, size: 10, font: regular, color: MUTED });
+  }
   y -= 4;
   paragraph(r.summary);
 
