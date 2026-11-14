@@ -54,7 +54,7 @@ A separate project from the Ragdoll Fling game (`C:\Users\Owner\Desktop\Video Ga
 
 1. [x] Design interview, saved here. (2026-11-14)
 2. [x] Stack chosen: Vite + HTML/CSS/TS. (2026-11-14)
-3. [ ] Repo: create the folder and public GitHub repo, protect `main`, first PR (the Vite skeleton).
+3. [x] Repo: create the folder and public GitHub repo, protect `main`, first PR (the Vite skeleton). (Done 2026-11-14. The "Protect main" ruleset requires a PR, blocks force pushes and deletion; the required `checks` status check gets added in phase 4 once that job exists.)
 4. [ ] Pipeline and hosting: reuse the game's setup. PR `checks` job (lint, typecheck, test, build) plus a preview link; merging to `main` deploys to staging automatically; production waits for the owner's approval (GitHub environments `staging` and `production`, required reviewer hollewood32-gif, plus an `npm run approve` script like the game's). Apex domain for production, `staging.` subdomain for staging.
 5. [ ] Content PRs: Home/About, Projects (Ragdoll Fling first), Resume (HTML + PDF), Contact.
 6. [ ] Polish: favicon, link preview card, accessibility and phone checks.

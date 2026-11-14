@@ -1,0 +1,19 @@
+/* Placeholder styles. The real design (clean and minimal, one accent color) comes in the content PRs. */
+:root {
+  font-family: system-ui, sans-serif;
+  line-height: 1.6;
+  color: #1a1a1a;
+  background: #ffffff;
+}
+
+body {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 4rem 1rem;
+}
+
+footer {
+  margin-top: 4rem;
+  color: #666;
+  font-size: 0.875rem;
+}
