@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Tab icon: a "JD" monogram in the site's light blue on its dark navy.
+       The letters are drawn as lines (not text), so they look the same on every computer. -->
+  <rect width="64" height="64" rx="14" fill="#0b1220"/>
+  <g fill="none" stroke="#7cc4ff" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- J -->
+    <path d="M27 17 V38 Q27 47 19 47 Q13 47 11.5 42"/>
+    <!-- D -->
+    <path d="M36 17 H41 Q53 17 53 32 Q53 47 41 47 H36 Z"/>
+  </g>
+</svg>
