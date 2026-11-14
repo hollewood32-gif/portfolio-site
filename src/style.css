@@ -278,6 +278,146 @@ h3 {
   margin-top: 1.5rem;
 }
 
+/* Screenshot at the top of a project card */
+.card-shot {
+  display: block;
+  margin: 0.5rem 0 1rem;
+}
+
+.card-shot img,
+.shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+/* ---------- Case study page ---------- */
+.case-study {
+  padding: 2.5rem 0 1rem;
+}
+
+.case-study h1 {
+  font-size: clamp(2rem, 6vw, 3rem);
+}
+
+.case-study .section p,
+.case-study .problem p {
+  margin: 0 0 1rem;
+}
+
+.back {
+  margin: 0 0 1.5rem;
+}
+
+.back a {
+  text-decoration: none;
+}
+
+.back-bottom {
+  margin-top: 2rem;
+}
+
+.shot {
+  margin: 2.5rem 0 0;
+}
+
+.shot figcaption {
+  margin-top: 0.5rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 1rem 1.5rem;
+  margin: 2rem 0 1rem;
+}
+
+.facts dt {
+  color: var(--muted);
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.facts dd {
+  margin: 0.15rem 0 0;
+  font-weight: 600;
+}
+
+code {
+  padding: 0.1em 0.35em;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+/* The pipeline as numbered steps joined by a line */
+.pipeline {
+  margin: 1.5rem 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.pipeline li {
+  position: relative;
+  padding: 0 0 1.25rem 3rem;
+  counter-increment: step;
+}
+
+.pipeline li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 700;
+  font-size: 0.9375rem;
+}
+
+.pipeline li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: calc(1rem - 1px);
+  top: 2.25rem;
+  bottom: 0.25rem;
+  width: 2px;
+  background: var(--border);
+}
+
+.pipeline strong {
+  display: block;
+  line-height: 2rem;
+}
+
+.pipeline span {
+  display: block;
+  color: var(--muted);
+}
+
+.problem + .problem {
+  margin-top: 1.75rem;
+}
+
+.problem h3 {
+  margin-bottom: 0.4rem;
+}
+
+.takeaways li + li {
+  margin-top: 0.5rem;
+}
+
 /* ---------- Resume ---------- */
 .section-head {
   display: flex;

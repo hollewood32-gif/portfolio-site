@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How I built Ragdoll Fling · Jeffrey Doughty</title>
+    <meta name="description" content="Case study: a browser physics game shipped through 21 pull requests, a CI/CD pipeline with an approval gate, and an online leaderboard on Cloudflare." />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="canonical" href="https://jeffreydoughty.com/projects/ragdoll-fling/" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="How I built Ragdoll Fling" />
+    <meta property="og:description" content="A browser physics game shipped through 21 pull requests, a CI/CD pipeline with an approval gate, and an online leaderboard on Cloudflare." />
+    <meta property="og:url" content="https://jeffreydoughty.com/projects/ragdoll-fling/" />
+    <meta property="og:image" content="https://jeffreydoughty.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Jeffrey Doughty: I build and ship web software, from first commit to production." />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <nav class="nav" aria-label="Main">
+        <a class="nav-name" href="/">Jeffrey Doughty</a>
+        <ul class="nav-links">
+          <li><a href="/#about">About</a></li>
+          <li><a href="/#projects">Projects</a></li>
+          <li><a href="/#resume">Resume</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main">
+      <article class="case-study" aria-labelledby="cs-title">
+        <p class="back"><a href="/#projects">← All projects</a></p>
+        <p class="eyebrow">Case study</p>
+        <h1 id="cs-title">How I built Ragdoll Fling</h1>
+        <p class="headline">
+          A 30-second browser physics game, shipped the way real teams ship software: small pull
+          requests, automated checks, a staging environment and an approval gate before production.
+        </p>
+        <div class="actions">
+          <a class="button" href="https://fling.jeffreydoughty.com">Play it</a>
+          <a class="button button-secondary" href="https://github.com/hollewood32-gif/ragdoll-fling">View the code</a>
+        </div>
+
+        <figure class="shot">
+          <img
+            src="/ragdoll-fling.webp"
+            width="960"
+            height="600"
+            alt="Ragdoll Fling mid-round: the ragdoll is being flung across the arena, with the damage counter at 2,438 and a x3.00 combo."
+          />
+          <figcaption>A real moment from the live game: mid-fling, with a x3 combo building.</figcaption>
+        </figure>
+
+        <dl class="facts">
+          <div><dt>Built</dt><dd>13–14 November 2026</dd></div>
+          <div><dt>Changes</dt><dd>21 pull requests (20 merged, 1 blocked on purpose)</dd></div>
+          <div><dt>Stack</dt><dd>TypeScript, Vite, Matter.js, HTML Canvas, Cloudflare Workers and D1, GitHub Actions</dd></div>
+          <div><dt>Live at</dt><dd><a href="https://fling.jeffreydoughty.com">fling.jeffreydoughty.com</a></dd></div>
+        </dl>
+
+        <section class="section" aria-labelledby="idea-title">
+          <h2 id="idea-title">The idea</h2>
+          <p>
+            A ragdoll sits in a walled arena. You grab it with the mouse (or a finger), fling it
+            into the walls, and every impact deals damage based on how fast it hit. Hits in quick
+            succession build a combo multiplier up to x5. After 30 seconds you get your total,
+            and coins to spend on upgrades.
+          </p>
+          <p>
+            I chose <strong>Matter.js</strong> for the physics (rigid bodies and joints) and plain
+            <strong>HTML Canvas</strong> for drawing, instead of a full game engine like Phaser. That
+            kept the moving parts small and meant I wrote and understood the game loop myself.
+            Every shape is drawn in code; there are no image files.
+          </p>
+        </section>
+
+        <section class="section" aria-labelledby="pipeline-title">
+          <h2 id="pipeline-title">How a change reaches players</h2>
+          <p>
+            Nothing goes straight to the live game. The <code>main</code> branch is protected, so
+            every change, even a one-line fix, travels this path:
+          </p>
+          <ol class="pipeline">
+            <li>
+              <strong>Pull request</strong>
+              <span>The change is proposed on its own branch, small enough to review in one sitting.</span>
+            </li>
+            <li>
+              <strong>Automated checks</strong>
+              <span>GitHub Actions runs lint, type-check, tests and a build. If any fail, merging is blocked.</span>
+            </li>
+            <li>
+              <strong>Preview link</strong>
+              <span>The build is uploaded as a separate preview version and the link is posted on the pull request, so the change can be played before it's merged.</span>
+            </li>
+            <li>
+              <strong>Staging</strong>
+              <span>Merging deploys automatically to a staging copy of the game, with its own database.</span>
+            </li>
+            <li>
+              <strong>Approval</strong>
+              <span>The pipeline pauses. Production only continues after I approve it.</span>
+            </li>
+            <li>
+              <strong>Production</strong>
+              <span>The exact same build that was tested on staging goes live. Database migrations run first.</span>
+            </li>
+          </ol>
+          <p>
+            All hosting configuration (Workers, custom domains, databases, rate limits) lives in the
+            repository as code, not in dashboard settings, so it's reviewed like any other change.
+          </p>
+        </section>
+
+        <section class="section" aria-labelledby="problems-title">
+          <h2 id="problems-title">Problems I solved</h2>
+
+          <div class="problem">
+            <h3>A ragdoll lying still was scoring points</h3>
+            <p>
+              Playtesting showed damage numbers ticking up while nobody was touching the game: a
+              resting limb twitched against the floor, and each tiny contact counted as a hit.
+              <strong>Fix:</strong> an impact only counts if the body was moving faster than a
+              minimum speed.
+            </p>
+          </div>
+
+          <div class="problem">
+            <h3>Holding the ragdoll against a wall beat skilful throws</h3>
+            <p>
+              Grabbing the ragdoll and pumping it against a wall scored more than actually throwing
+              it, which made the game boring. <strong>Fix:</strong> hits while you're still holding
+              on score only 25% and don't build the combo. Because that changed what a score means,
+              I moved saved best scores to a new storage key so old and new scores weren't mixed.
+            </p>
+          </div>
+
+          <div class="problem">
+            <h3>Proving the safety net works</h3>
+            <p>
+              A pipeline is only useful if it actually stops bad changes. So I opened a pull request
+              with a deliberately broken test. The required check failed, GitHub blocked the merge,
+              and I closed it unmerged. That's the one pull request of the 21 that never shipped.
+            </p>
+          </div>
+
+          <div class="problem">
+            <h3>A leaderboard that's hard to cheat and stores nothing personal</h3>
+            <p>
+              Scores are saved through a small API on Cloudflare Workers into a D1 (SQL) database.
+              The server rejects malformed data and impossible scores (over 300,000, about five
+              times the best real round), and rate-limits each visitor to 5 submissions a minute.
+              Players enter 3-letter initials only, so there's no free text to moderate. The
+              database stores initials, score and date, and IP addresses are used in memory for
+              rate limiting but never saved. The board only accepts rounds played with upgrades
+              switched off, so it measures skill, not how long you've grinded.
+            </p>
+          </div>
+
+          <div class="problem">
+            <h3>When the approve button didn't work</h3>
+            <p>
+              GitHub's "approve deployment" button sometimes didn't register, leaving releases stuck.
+              Instead of clicking harder, I added a small script, <code>npm run approve</code>, that
+              finds the waiting deployment and approves it through the GitHub API.
+            </p>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="learned-title">
+          <h2 id="learned-title">What I'd tell another team</h2>
+          <ul class="takeaways">
+            <li>Small pull requests are easier to review, easier to undo and easier to explain.</li>
+            <li>Test the safety net itself: a check nobody has seen fail might not be checking anything.</li>
+            <li>Ship the exact build you tested. Staging and production deploy the same files.</li>
+            <li>Playtesting finds the real bugs. Two of my biggest fixes were about scoring that felt wrong, not code that crashed.</li>
+          </ul>
+        </section>
+
+        <p class="back back-bottom"><a href="/#projects">← Back to all projects</a></p>
+      </article>
+    </main>
+
+    <footer class="site-footer" id="footer"></footer>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
