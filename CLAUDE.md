@@ -28,14 +28,15 @@ A separate project from the Ragdoll Fling game (`C:\Users\Owner\Desktop\Video Ga
      - Describe the tech (TypeScript, Vite, Matter.js physics, HTML Canvas), the CI/CD pipeline (PR checks and preview links, auto-deploy to staging, production after manual approval, all on Cloudflare Workers with config in the repo), and the online leaderboard (Worker API + Cloudflare D1 database, migrations run by the pipeline, validation and rate limiting).
   3. **Resume:** shown on the page as HTML (fast to skim, searchable) plus a "Download PDF" button. The owner has a resume file to supply.
   4. **Contact:** an email link plus GitHub (https://github.com/hollewood32-gif) and LinkedIn links. The owner doesn't have a LinkedIn profile ready yet, so leave that link out until they do.
-- **Look and feel:** clean and minimal. Lots of white space, one accent color, readable type, fast to load. Should look good on phones too.
+- **Look and feel:** clean and minimal, readable type, fast to load, good on phones. **Dark by default with light blue buttons and links** (changed from a white page on 2026-11-14 at the owner's request). Visitors whose device is set to light mode get a white version with a darker blue, via `@media (prefers-color-scheme: light)`. All colors are CSS variables at the top of `src/style.css`.
+- **Headline (chosen 2026-11-14):** "I build and ship web software, from first commit to production."
+- **Bio:** drafted from the owner's resume (`C:\Users\Owner\Downloads\JD RESUME - Google Docs.pdf`, Feb 2026): U.S. Navy nuclear equipment technician (2018–2020), electrical technician (Intercoast College, 2022), cyber security specialist (2023), now building web software. Never publish the resume's phone number or street address.
 
 ### Open content questions (ask when building the sections)
 
 - Which email address to show publicly. Options: the owner's personal address, or a free Cloudflare Email Routing address on the domain (e.g. hello@jeffreydoughty.com) that forwards to their inbox, which the owner would set up in the dashboard. Don't put any email on the site until the owner picks.
-- The resume file (where it is, and which parts to show on the page).
-- A short bio and the headline wording.
-- The accent color.
+- Which parts of the resume to show on the page and in the downloadable PDF (the current resume is aimed at trades and grocery work, and lists the phone number and email).
+- Nav links get added as each section lands, so the nav never points at a missing section (`src/page.test.ts` checks this).
 
 ## Tech stack (chosen 2026-11-14)
 

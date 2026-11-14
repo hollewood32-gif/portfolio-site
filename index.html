@@ -4,15 +4,55 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jeffrey Doughty</title>
-    <meta name="description" content="Jeffrey Doughty's portfolio: projects, resume and contact." />
+    <meta name="description" content="Jeffrey Doughty builds and ships web software, from first commit to production. Projects, resume and contact." />
+    <!-- Tells the browser the page supports both looks, so scrollbars and form controls match. -->
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
-    <main>
-      <h1>Jeffrey Doughty</h1>
-      <p>Portfolio coming soon. Meanwhile, try my game <a href="https://fling.jeffreydoughty.com">Ragdoll Fling</a>.</p>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <nav class="nav" aria-label="Main">
+        <a class="nav-name" href="#top">Jeffrey Doughty</a>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="https://github.com/hollewood32-gif">GitHub</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <p class="eyebrow">Hi, I'm</p>
+        <h1 id="hero-title">Jeffrey Doughty</h1>
+        <p class="headline">I build and ship web software, from first commit to production.</p>
+        <div class="actions">
+          <a class="button" href="https://fling.jeffreydoughty.com">Play my game</a>
+          <a class="button button-secondary" href="https://github.com/hollewood32-gif">See my code</a>
+        </div>
+      </section>
+
+      <section class="section" id="about" aria-labelledby="about-title">
+        <h2 id="about-title">About</h2>
+        <p>
+          I'm a U.S. Navy veteran. I started out as a nuclear equipment technician, where following
+          procedures exactly, testing equipment before trusting it, and documenting everything were
+          part of every shift. Since then I've trained as an electrical technician and a cyber
+          security specialist, and now I build web software.
+        </p>
+        <p>
+          I bring the same discipline to code: every change goes through a pull request, automated
+          checks and a staging deploy before it reaches production. My first project,
+          <a href="https://fling.jeffreydoughty.com">Ragdoll Fling</a>, is a browser game I took from
+          an idea to a live site with a full CI/CD pipeline and an online leaderboard.
+        </p>
+      </section>
     </main>
-    <footer id="footer"></footer>
+
+    <footer class="site-footer" id="footer"></footer>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
