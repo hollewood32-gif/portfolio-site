@@ -12,6 +12,7 @@
     "preview": "vite preview",
     "approve": "node scripts/approve-production.mjs",
     "images": "node scripts/make-images.mjs",
+    "check-sites": "node scripts/check-sites.mjs",
     "deploy:staging": "npm run build && wrangler deploy --env staging",
     "deploy:production": "npm run build && wrangler deploy --env=\"\""
   },

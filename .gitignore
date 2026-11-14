@@ -4,6 +4,9 @@ node_modules/
 # Build output. Recreated by `npm run build`.
 dist/
 
+# Report written by `npm run check-sites`
+uptime-report.md
+
 # Wrangler's local cache
 .wrangler/
 
