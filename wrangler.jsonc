@@ -1,0 +1,60 @@
+// Cloudflare Workers configuration ("infrastructure as code").
+// `wrangler deploy` reads this file and makes Cloudflare match it.
+//
+// Two environments:
+//   production (the top level)  -> Worker "portfolio"         at jeffreydoughty.com (+ www redirect)
+//   staging    (env.staging)    -> Worker "portfolio-staging" at staging.jeffreydoughty.com
+// Deploy staging with `wrangler deploy --env staging`, production with `--env=""`.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+
+  // Which Cloudflare account to deploy to. An ID, not a secret.
+  "account_id": "1fffec26e09010f5be9bf9332b2b8e03",
+
+  // The production Worker's name in the Cloudflare account.
+  "name": "portfolio",
+
+  // Locks in which version of the Workers runtime behavior we get,
+  // so a Cloudflare update can't silently change how the site runs.
+  "compatibility_date": "2026-11-01",
+
+  // Small server code (worker/index.ts): the www redirect.
+  "main": "./worker/index.ts",
+
+  // The site itself is static files that Vite builds into dist/.
+  // run_worker_first: every request goes through the code above first, so it
+  // can spot "www." in the address; the code then hands normal requests to ASSETS.
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": true
+  },
+
+  // Production keeps a backup address on workers.dev, but doesn't make
+  // per-version preview links (those belong to staging).
+  "workers_dev": true,
+  "preview_urls": false,
+
+  // Serve production on the main domain, plus www (which the code redirects).
+  // Because jeffreydoughty.com's DNS is on Cloudflare, deploying creates the
+  // DNS records and HTTPS certificates for us.
+  "routes": [
+    { "pattern": "jeffreydoughty.com", "custom_domain": true },
+    { "pattern": "www.jeffreydoughty.com", "custom_domain": true }
+  ],
+
+  "env": {
+    "staging": {
+      // Wrangler names this Worker "portfolio-staging" automatically.
+      "workers_dev": true,
+
+      // Each pull request uploads a version here with its own preview link,
+      // like https://pr-2-portfolio-staging.ragdoll-fling.workers.dev
+      "preview_urls": true,
+
+      "routes": [
+        { "pattern": "staging.jeffreydoughty.com", "custom_domain": true }
+      ]
+    }
+  }
+}
