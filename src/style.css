@@ -362,6 +362,35 @@ h3 {
   padding-left: 1.25rem;
 }
 
+/* ---------- Contact ---------- */
+.contact-list {
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-list li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  padding: 0.875rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.contact-list li:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+.contact-label {
+  min-width: 5rem;
+  color: var(--muted);
+}
+
+.contact-value {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
 /* ---------- Footer ---------- */
 .site-footer {
   max-width: 48rem;

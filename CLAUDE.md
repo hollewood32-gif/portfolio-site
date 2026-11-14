@@ -34,7 +34,6 @@ A separate project from the Ragdoll Fling game (`C:\Users\Owner\Desktop\Video Ga
 
 ### Open content questions (ask when building the sections)
 
-- Which email address to show publicly. Options: the owner's personal address, or a free Cloudflare Email Routing address on the domain (e.g. hello@jeffreydoughty.com) that forwards to their inbox, which the owner would set up in the dashboard. Don't put any email on the site until the owner picks.
 - Which parts of the resume to show on the page and in the downloadable PDF (the current resume is aimed at trades and grocery work, and lists the phone number and email).
 - Nav links get added as each section lands, so the nav never points at a missing section (`src/page.test.ts` checks this).
 
@@ -67,7 +66,7 @@ A separate project from the Ragdoll Fling game (`C:\Users\Owner\Desktop\Video Ga
    - [x] PR #3: Home/About and the dark design.
    - [x] PR #4: Projects (Ragdoll Fling featured, plus "This website"). On phones (under 34rem) the nav hides the name and keeps only the links.
    - [x] PR #5: Resume. Software-first rewrite of the owner's resume (approved 2026-11-14), location shown as "Orange County, CA" only. The text lives in `src/resume-data.ts`; a plugin in `vite.config.ts` builds both the page section (replacing `<!-- resume:content -->` in index.html) and `Jeffrey-Doughty-Resume.pdf` (pdf-lib, layout in `src/resume-pdf.ts`). A test fails if a phone number ever appears in the resume data. The Cyber Security Specialist program's school isn't on the original resume; ask the owner if they want it added.
-   - [ ] Contact (then add the chosen email to the resume header too).
+   - [x] PR #6: Contact. Public address **jeff@jeffreydoughty.com** (chosen 2026-11-14), forwarded to the owner's personal inbox by Cloudflare Email Routing, which the owner set up in the dashboard. Email Routing isn't something Wrangler manages, so it's the one piece of config outside the repo (its MX and SPF records show in the zone's DNS). The page never contains the whole address: `src/contact.ts` joins `data-user` and `data-domain` in the browser, and `src/contact.test.ts` fails if a full address appears in index.html. The resume PDF does show it in plain text (unavoidable for a resume). GitHub moved from the nav into Contact.
 6. [ ] Polish: favicon, link preview card, accessibility and phone checks.
 
 ## Notes for future sessions
